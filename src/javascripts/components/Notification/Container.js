@@ -50,28 +50,9 @@ export default class Notification extends Component {
 
 
     render() {
-        // const notifications = constants.POSITIONS.map( position => {
-        //     const _notifications = this.state.notifications.filter( notification => position === notification.position);
-        //
-        //     if ( !_notifications.size ) return null;
-        //
-        //     return (
-        //         <NotificationContainer
-        //             ref={ 'container-' + position }
-        //             key={ position }
-        //             position={ position }
-        //             notifications={ _notifications }
-        //             getStyles={ self._getStyles }
-        //             onRemove={ self._didNotificationRemoved }
-        //             noAnimation={ self.props.noAnimation }
-        //             allowHTML={ self.props.allowHTML }
-        //         />
-        //     );
-        // });
 
-        if ( ! this.state.notifications.size ) return null;
+        // if ( ! this.state.notifications.size ) return null;
 
-        // const position = this.state.notifications.get(0).get('position');
         // Group by position
         const notifications = constants.POSITIONS.valueSeq().map( position => {
             const _notifications = this.state.notifications.filter( notification => position === notification.get('position'));
