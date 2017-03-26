@@ -1,19 +1,11 @@
 import React, { Component } from 'react'
-import Notification from './Notification/Container'
+// import Notification from 'react-notification'
+import Notification from '../../../../npm/react-notification/dist/react-notification'
 
-import {
-    Grid,
-    Row,
-    Col,
-    FormControl,
-    FormGroup,
-    Radio,
-    Button,
-    ControlLabel
-} from 'react-bootstrap';
-import FRC from 'formsy-react-components';
+import { levels, positions, animationType, animationTiming, defaultValue } from 'react-notification/src/Constants'
 
-import { LEVELS, DEFAULT_NOTIFICATION, POSITIONS, ANIMATION_TYPE, ANIMATION_TIMING } from 'constants/Notification'
+import { Grid, Row, Col, Button } from 'react-bootstrap';
+import { Form, Select, RadioGroup, Textarea, Input, Checkbox } from 'formsy-react-components';
 
 export default class App extends Component {
 
@@ -22,10 +14,10 @@ export default class App extends Component {
 
         this._notification = null;
 
-        this._levels = LEVELS.map( (value, label) => ({value, label})).toArray();
-        this._position = POSITIONS.map( (value, label) => ({value, label})).toArray();
-        this._animation_type = ANIMATION_TYPE.map( (value, label) => ({value, label})).toArray();
-        this._animation_timing = ANIMATION_TIMING.map( (value, label) => ({value, label})).toArray();
+        this._levels = levels.map( (value, label) => ({value, label})).toArray();
+        this._position = positions.map( (value, label) => ({value, label})).toArray();
+        this._animation_type = animationType.map( (value, label) => ({value, label})).toArray();
+        this._animation_timing = animationTiming.map( (value, label) => ({value, label})).toArray();
     }
 
     _showNotification(model) {
@@ -48,67 +40,68 @@ export default class App extends Component {
             <div>
                 <Grid>
                     <h1>Notify</h1>
-                    <FRC.Form
+                    <Form
                         onSubmit={this.submitForm}
                         layout="vertical"
                     >
                         <Row>
                             <Col md={4}>
-                                <FRC.Textarea
+                                <Textarea
                                     rows={3}
                                     cols={40}
                                     name="message"
                                     label="Message"
+                                    value="Lorem ipsum dolor sit amet, consectetur adipiscing elit"
                                     placeholder="Enter a message..."
                                 />
-                                <FRC.Input
+                                <Input
                                     name="autoDismiss"
-                                    value={DEFAULT_NOTIFICATION.get('autoDismiss')}
+                                    value={defaultValue.get('autoDismiss')}
                                     label="Time out"
                                     type="number"
                                 />
-                                <FRC.Checkbox
+                                <Checkbox
                                     label="Auto dismiss"
                                     name="Dismissible"
-                                    value={DEFAULT_NOTIFICATION.get('dismissible')}
+                                    value={defaultValue.get('dismissible')}
                                 />
-                                <FRC.Checkbox
+                                <Checkbox
                                     label="Close button"
                                     name="closeButton"
-                                    value={DEFAULT_NOTIFICATION.get('closeButton')}
+                                    value={defaultValue.get('closeButton')}
                                 />
                             </Col>
                             <Col md={4}>
-                                <FRC.RadioGroup
+                                <RadioGroup
                                     label="Type"
                                     name="level"
-                                    value={DEFAULT_NOTIFICATION.get('level')}
+                                    value={defaultValue.get('level')}
                                     options={this._levels}
                                 />
-                                <FRC.RadioGroup
+                                <RadioGroup
                                     label="Position"
                                     name="position"
-                                    value={POSITIONS.get('bottomCenter')}
+                                    value={positions.get('bottomCenter')}
                                     options={this._position}
                                 />
                             </Col>
                             <Col md={4}>
-                                <FRC.RadioGroup
+                                <RadioGroup
                                     label="Animation Type"
                                     name="animationType"
-                                    value={ANIMATION_TYPE.get('easeIn')}
+                                    value={animationType.get('easeIn')}
                                     options={this._animation_type}
                                 />
-                                <FRC.Select
+                                <Select
                                     label="Transition Enter Timeout"
                                     name="transitionEnterTimeout"
-                                    value={DEFAULT_NOTIFICATION.get('transitionEnterTimeout')}
+                                    value={defaultValue.get('transitionEnterTimeout')}
                                     options={this._animation_timing}
                                 />
-                                <FRC.Select
+                                <Select
                                     label="Transition Leave Timeout"
                                     name="transitionLeaveTimeout"
-                                    value={DEFAULT_NOTIFICATION.get('transitionLeaveTimeout')}
+                                    value={defaultValue.get('transitionLeaveTimeout')}
                                     options={this._animation_timing}
                                 />
                             </Col>
@@ -118,7 +111,7 @@ export default class App extends Component {
                                 <Button type="submit">Show Notify</Button>
                             </Col>
                         </div>
-                    </FRC.Form>
+                    </Form>
                 </Grid>
                 <Notification ref={this._setNotification} />
             </div>

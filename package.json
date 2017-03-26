@@ -104,7 +104,6 @@
     "react-fa": "^4.1.2",
     "react-fontawesome": "^1.5.0",
     "react-icons": "^2.2.3",
-    "react-notification": "git+https://github.com/voodee/react-notification.git",
-    "react-notification-system": "^0.2.13"
+    "react-notification": "https://github.com/voodee/react-notification/tarball/master"
   }
 }
