@@ -3,12 +3,17 @@ import { render } from 'react-dom'
 import { Provider } from 'react-redux'
 import App from './container/App'
 
-import configureStore from './store/configureStore';
+import Notifications from 'redux-notification'
+
+import configureStore from './store/configureStore'
 const store = configureStore();
 
 render(
     <Provider store={store}>
-        <App />
+        <div>
+            <App />
+            <Notifications />
+        </div>
     </Provider>,
     document.getElementById('app')
 );

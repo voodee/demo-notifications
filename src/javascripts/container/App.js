@@ -1,21 +1,17 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux';
-// import Notifications from './Notifications'
-import Notifications from '../../../../npm/redux-notification/lib/Notifications'
 
-import { levels, positions, animationType, animationTiming, defaultValue } from 'react-notification/src/Constants'
+import { levels, positions, animationType, animationTiming, defaultValue } from 'react-notification/lib/constants'
 
 import { Grid, Row, Col, Button } from 'react-bootstrap';
 import { Form, Select, RadioGroup, Textarea, Input, Checkbox } from 'formsy-react-components';
+import { showNotification } from 'redux-notification'
 
-import { showNotification } from '../actions/Notifications';
 
 class App extends Component {
 
     constructor() {
         super();
-
-        this._notification = null;
 
         this._levels = levels.map( (value, label) => ({value, label})).toArray();
         this._position = positions.map( (value, label) => ({value, label})).toArray();
@@ -31,6 +27,7 @@ class App extends Component {
 
     submitForm = (model) => {
         Object.keys(model).forEach(key => (model[key] === undefined || model[key] == '') && delete model[key]);
+
         this._showNotification(model)
     };
 
@@ -113,7 +110,6 @@ class App extends Component {
                         </div>
                     </Form>
                 </Grid>
-                <Notifications />
             </div>
         )
     }
