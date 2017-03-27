@@ -1,12 +1,16 @@
 import React, { Component } from 'react'
-import Notification from 'react-notification'
+import {connect} from 'react-redux';
+// import Notifications from './Notifications'
+import Notifications from '../../../../npm/redux-notification/lib/Notifications'
 
 import { levels, positions, animationType, animationTiming, defaultValue } from 'react-notification/src/Constants'
 
 import { Grid, Row, Col, Button } from 'react-bootstrap';
 import { Form, Select, RadioGroup, Textarea, Input, Checkbox } from 'formsy-react-components';
 
-export default class App extends Component {
+import { showNotification } from '../actions/Notifications';
+
+class App extends Component {
 
     constructor() {
         super();
@@ -19,20 +23,17 @@ export default class App extends Component {
         this._animation_timing = animationTiming.map( (value, label) => ({value, label})).toArray();
     }
 
+
     _showNotification(model) {
-        this._notification.add(model)
-    };
-
-
-    _setNotification = notification => {
-        this._notification = notification;
-    };
+        this.props.dispatch( showNotification(model) )
+    }
 
 
     submitForm = (model) => {
         Object.keys(model).forEach(key => (model[key] === undefined || model[key] == '') && delete model[key]);
-        this._showNotification(model);
+        this._showNotification(model)
     };
+
 
     render() {
         return (
@@ -112,8 +113,14 @@ export default class App extends Component {
                         </div>
                     </Form>
                 </Grid>
-                <Notification ref={this._setNotification} />
+                <Notifications />
             </div>
         )
     }
 }
+
+const mapStateToProps = (state, ownProps) => {
+    return {}
+};
+
+export default connect(mapStateToProps)(App)
